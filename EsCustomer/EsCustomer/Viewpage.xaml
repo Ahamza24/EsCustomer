@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EsCustomer.Viewpage"
+             NavigationPage.HasNavigationBar="False">
+    
+    
+    <ScrollView BackgroundColor="#284243">
+
+        <StackLayout>
+
+            <Image HeightRequest="210">
+                <Image.Source>
+
+                    <OnPlatform x:TypeArguments="ImageSource"
+                                        Android="Logo.png"/>
+
+                </Image.Source>
+            </Image>
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0">
+                    <ListView x:Name="listView"
+                        Margin="20"
+                        RefreshCommand="{Binding RefreshCommand}"
+                        IsRefreshing="{Binding IsRefreshing}"
+                        IsPullToRefreshEnabled="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ImageCell Text="{Binding BrandName}"
+                                    Detail="{Binding DetailsSummary}" 
+                            ImageSource="{Binding ImageFile.Data, Converter={StaticResource ByteArrayToImageSourceConverter}}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Label Text="Brand" FontSize="Large"/>
+                    <Editor Text="{Binding SearchTerm}"
+                        HeightRequest="50" 
+                        Completed="SearchTerm_Completed" />
+                </StackLayout>
+
+            </Grid>
+
+   
+
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>
